@@ -1,74 +1,73 @@
 <!DOCTYPE html>
 <html>
- <title>Author PAge</title>
- 
+ <head>
+    <title> author</title>
+    <link rel="stylesheet" href="colour.css">
+ </head>
 <body>
-<h4>Author entry Sowmya Reddy Allugari</h4>
-<h2>Getting input</h2>
+
+<h2>Author entry SowmyaReddy Allugari</h2>
 
 <form>
-        <label for="secretAuthor">The hidden author name:</label>
-        <input type="password" id="secretAuthor" value="Dickens">
-        <br><br>
-        <label for="guessAuthor">Guess the author:</label>
-        <input type="text" id="guessAuthor"><br><br>    
+    <label for="secretvalue">The hidden author name</label>
+    <input type="password" value="Dickens" name="secretvalue" id="secretvalue">
+    <br><br>
+    <label for="input">Guess the author</label>
+    <input type="text" id="input">
+    <br><br>
+    <button type="button" onclick="checkAuthor()" id="guess">check the Guess</button>
+    <br><br>
+    <p>Good:<span id="goodCount">0</span></p>
+    <p>oops:<span id="oppsCount">0</span></p>
+    <p>IncorrectGuess: <span id="incorrectguess">0</span></p>
 
-    <input type="button" onclick="checkAuthor()" value="Check the guess">
 </form>
+<script>
+    var good=0;
+    var oops=0;
+    function checkAuthor(){
+        var original=document.getElementById("secretvalue").value
+        var guess=document.getElementById("input").value
+        if(original==guess){
+            good++;
+            alert("you got it right");
+        }else{
+            oops++;
+            if(oops>7){
+            document.getElementById("guess").disabled=true;
+            alert("Sorry,ran out of guesses "); 
 
-
-<p id="results"> </p>
-<script> 
-
-var good = 0;
-var oops = 0;
-function checkAuthor() {
-           
-            var secretAuthorInput = document.getElementById("secretAuthor");
-            var guessAuthorInput = document.getElementById("guessAuthor");
-
-            var secretAuthor = secretAuthorInput.value;
-            var guess = guessAuthorInput.value;
-
-            if (secretAuthor === guess) {
-                good++; 
-                alert("You got it right!");
-            } else {
-                oops++; 
-                alert("Sorry!");
-            }
-
-            var resultsElement = document.getElementById("results");
-            resultsElement.textContent = "Good: " + good + ", Oops: " + oops;
+             }else{
+                alert("sorry");
+             }
+            
         }
-    </script>
-
-<div id="imageContainer">
-    <img id="cityImage" src="Goa.jpg" alt="city Image" width="100" height="100" 
-    onclick="selectImage()">
+        document.getElementById("goodCount").innerHTML=good;
+        document.getElementById("oppsCount").innerHTML=oops;
+        document.getElementById("incorrectguess").innerHTML=oops;
+    }
+</script>
+<div>
+    <img id='CityImage' src="Goa.jpg" onclick="selectImage()" alt="Goa Image" width="100 px" height="100 px">
 </div>
 
 <script>
-    var useImage = 1;
-    function selectImage() {
-    var image = document.getElementById("cityImage");
-    switch (useImage) {
-        case 1:
-            image.src = "ladhakk.jpg";
-            useImage = 2;
-            break;
-        case 2:
-            image.src = "atlanta.jpg";
-            useImage = 3;
-            break;
-        case 3:
-            image.src = "Goa.jpg"; 
-            useImage = 1;
-            break;
-    }
-}
-</script>
-<!--part 4 completed-->
+    var useImage=1;
 
+    function selectImage(){
+        switch(useImage){
+          case 1: document.getElementById('CityImage').src="atlanta.jpg";
+          useImage=2;
+          break;
+          case 2: document.getElementById('CityImage').src="ladhakk.jpg";
+          useImage=3;
+          break;
+          case 3: document.getElementById('CityImage').src="Goa.jpg";
+          useImage=1;
+          break;
+          default: break;
+        }
+    }
+</script>
 </body>
 </html>
